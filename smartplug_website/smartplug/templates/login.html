@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <title>LOG IN</title>
+    <style media="screen">
+      body {
+    font-family: "Ubuntu";
+}
+
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%;
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+    </style>
+ <div class="container" style="max-height:70% max-width:50% ">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+  var messages={{ messages | safe }};
+  for(var i=0;i<messages.length;i++)
+  {
+    alert(messages[i]);
+  }
+</script>
+
+        {% endif %}
+    {% endwith %}
+</div>
+  </head>
+  <body>
+    <div class="sidenav">
+             <div class="login-main-text">
+                <h1>SMART PLUG<br> Login Page</h1>
+                <p>Login or register from here to access.</p>
+             </div>
+          </div>
+          <div class="main">
+             <div class="col-md-6 col-sm-12">
+                <div class="login-form">
+                   <form action="{{url_for('check')}}" method="POST">
+                      <div class="form-group">
+                         <label>Email</label>
+                         <input type="email" class="form-control" placeholder="Email" name="email">
+                      </div>
+                      <div class="form-group">
+                         <label>Password</label>
+                         <input type="password" class="form-control" placeholder="Password" name="password">
+                      </div>
+                      <button type="submit" class="btn btn-black">Login</button>
+                      <a href="register" class="btn btn-secondary">Register</a>
+                   </form>
+                </div>
+             </div>
+          </div>
+
+  </body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <title>Iot Smart Plug</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    font: 400 15px Lato, sans-serif;
+    line-height: 1.8;
+    color: #818181;
+  }
+  h2 {
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #303030;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+  h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    color: #303030;
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+  .jumbotron {
+    background-color: #696969;
+    color: #fff;
+    padding: 100px 25px;
+    font-family: Montserrat, sans-serif;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .logo-small {
+    color: #696969;
+    font-size: 50px;
+  }
+  .logo {
+    color: #696969;
+    font-size: 200px;
+  }
+  .thumbnail {
+    padding: 0 0 15px 0;
+    border: none;
+    border-radius: 0;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+  }
+  .carousel-control.right, .carousel-control.left {
+    background-image: none;
+    color: #696969;
+  }
+  .carousel-indicators li {
+    border-color: #f4511e;
+  }
+  .carousel-indicators li.active {
+    background-color: #f4511e;
+  }
+  .item h4 {
+    font-size: 19px;
+    line-height: 1.375em;
+    font-weight: 400;
+    font-style: italic;
+    margin: 70px 0;
+  }
+  .item span {
+    font-style: normal;
+  }
+  .panel {
+    border: 1px solid #f4511e;
+    border-radius:0 !important;
+    transition: box-shadow 0.5s;
+  }
+  .panel:hover {
+    box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
+  .panel-footer .btn:hover {
+    border: 1px solid #f4511e;
+    background-color: #fff !important;
+    color: #f4511e;
+  }
+  .panel-heading {
+    color: #fff !important;
+    background-color: #f4511e !important;
+    padding: 25px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .panel-footer {
+    background-color: white !important;
+  }
+  .panel-footer h3 {
+    font-size: 32px;
+  }
+  .panel-footer h4 {
+    color: #aaa;
+    font-size: 14px;
+  }
+  .panel-footer .btn {
+    margin: 15px 0;
+    background-color: #f4511e;
+    color: #fff;
+  }
+  .navbar {
+    margin-bottom: 0;
+    background-color: #000000;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+    font-family: Montserrat, sans-serif;
+  }
+  .navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+  }
+  .navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #f4511e !important;
+    background-color: #fff !important;
+  }
+  .navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+  }
+  footer .glyphicon {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #f4511e;
+  }
+  .slideanim {visibility:hidden;}
+  .slide {
+    animation-name: slide;
+    -webkit-animation-name: slide;
+    animation-duration: 1s;
+    -webkit-animation-duration: 1s;
+    visibility: visible;
+  }
+  @keyframes slide {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+  @-webkit-keyframes slide {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(70%);
+    }
+    100% {
+      opacity: 1;
+      -webkit-transform: translateY(0%);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+    .btn-lg {
+      width: 100%;
+      margin-bottom: 35px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    .logo {
+      font-size: 150px;
+    }
+  .imgh{
+    height:100px;
+    width:100px;
+  }
+}
+  </style>
+<div class="container" style="max-height:70% max-width:50% ">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+  var messages={{ messages | safe }};
+  for(var i=0;i<messages.length;i++)
+  {
+    alert(messages[i]);
+  }
+</script>
+
+        {% endif %}
+    {% endwith %}
+</div>
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<nav class="navbar navbar-default navbar-fixed-top mycolor">
+  <div class="container mycolor">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage"><img src="{{url_for('static',filename='logo.png')}}" alt="logo" style="width:80px;"></a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#specs">SPECS</a></li>
+        <li><a href="#gallery">GALLERY</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+        <li><a href="login">LOG IN</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>Iot Smart Plug</h1>
+  <p>The Future is now</p>
+  <form action="{{url_for('subscribe')}}" method="POST">
+    <div class="input-group">
+      <input type="email" class="form-control" size="50" placeholder="Email Address" name="subsemail" required>
+      <div class="input-group-btn">
+        <button type="submit" class="btn btn-danger">Subscribe</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Container (About Section) -->
+<div id="about" class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <h2>What Is a SmartPlug ?</h2>
+      <h4>The smart home sector is taking off, with all kinds of brands putting forth their own devices that promise to help you save time, electricity, maintain better home security, and get off the couch less often. <i><big>"Turning your “dumb” home into a smart one isn’t difficult if you have the right devices."</i></big> In fact, there’s one device that can make your entire home smarter, or at least help you control your otherwise “dumb” devices more effectively and easily.<br><br>A smart plug is a device that you can plug into any wall outlet in your home. Once it’s plugged in, voilà! You have a smart outlet! What makes it smart is a connection to a mobile app that lets you control the outlet from your phone. Once the outlet is smart, any appliance you plug into it becomes smart. This means that you can turn off a lamp or start the slow cooker with a swipe of your finger—no matter where you are. And if you don’t even want to do that much work, just set up a schedule, and let the devices connected to your smart plug take care of themselves.</h4>
+      <h3><b>What can It do ?</b></h3>
+      <p>A smart plug transforms even “dumb” devices into a part of your smart home network, giving you greater control and customizable options just by plugging the device in. Table lamps, the clothes iron, and even the coffee maker get an IQ upgrade with smart plugs. For the most features and best reliability, stick with smart plugs that connect to Wi-Fi either directly or using a bridge or dongle that plugs into your router.<br></p>
+      <br><button class="btn btn-default btn-lg" data-toggle="collapse" data-target="#demo">Know more....</button>
+      <div id="demo" class="collapse">
+        <h4>What makes Smart Plugs 'Smart'?</h4>
+        <p>A smart plug is like a power-point adapter – it fits between your power socket and the appliance you wish to plug in. At its most basic level, it simply turns things on and off. But, when connected to a smart home platform, it becomes a very nifty device.<br><br>They are considered ‘smart’ because they let you control your appliances from an app on your phone from anywhere. They even let you set schedules for your smart plugs so you can turn appliances on and off at set times and on specific days.<br><br>So how do you control them? Our smart plug communicate using your home’s Wi-Fi network to a central control hub. Then, the hub uses your Wi-Fi to send information to an app on your phone.</p>
+        <h4><i>Benifits:</h4></i>
+        <ul style="list-style-type:disc;">
+          <li><i><h5><b>Set up for less vampire power</b></h5></i></li>
+          <p>Vampire power is the power your electronic devices use when they are on standby. Vampire or standby power can make up to 10% of your electricity bills.</p>
+          <p>While a single device consumes very little in annual electricity use, when multiplied by several dozen products, you're no longer talking about pocket change. What’s more, standby power use is roughly responsible for 1% of global CO2 emissions!<br>Some of the biggest standby power energy suckers are:</p>
+          <ul style="list-style-type:square;">
+            <li>Laptops and desktop computers</li>
+            <li>Heaters and ACs</li>
+            <li>Wi-Fi modems</li>
+            <li>Printers and scanners</li>
+            <li>TVs, Set Top Boxes, DVD players and game consoles</li>
+            <li>Phone chargers</li>
+            <li>Microwaves, blenders and other kitchen appliances</li>
+          </ul>
+          <p>When you connect your appliances to smart plugs, you can switch them off from your phone when you’re about to leave the house or go to sleep. Or, you can schedule them to turn off when you know you won’t be using them. This way, you can save power without even thinking about it!</p>
+          <li><i><h5><b>Limit your children’s screen time</b></h5></i></li>
+          <p>Tired of the weekday battle of getting your children to do their homework or to go outside for a while? Having trouble enforcing rules on how much TV can be watched, or how long the Xbox or play station can be played? Smart plugs can help you manage your children’s screen time and put into place a healthy after-school routine.</p>
+          <p>Here’s a great example: Let your kid’s zone out and rest for half an hour when they first arrive home. Next, turn the power off to the TV setup for an hour or two, and make this ‘homework and outdoor play time’.</p>
+          <p>Put the power back on for the hour before dinner so you have the headspace and quiet to get that sorted. Finally, make sure no one is getting up in the night to play games when they are meant to be sleeping – turn off the power when you go to bed.<br>The simple use of a smart plug on a schedule makes it easy to put a regular routine like this into practice!</p>
+          <li><i><h5><b>Using Smart Plugs for Security and Safety</b></h5></i></li>
+          <p>Turn your lights on and off remotely or create a lighting schedule. With this solution, your home will look like it’s occupied — even if you’re thousands of miles away.</p>
+          <p>Morning chaos is the norm in many households. Instead of worrying that you left the curling iron on (again), turn it off remotely. You can also use a smart plug to turn the curling iron on each weekday morning at a particular time, so it’s ready for you.</p>
+          <li>Control plugin devices like lamps,fans,T.V,heaters and other small alliances with just your finger tips</li>
+          <li>Create schedules and timers to ON and OFF your devices</li>
+          <li>Comes with pretty cool userfriendly interactive user friendly website</li>
+        </ul>
+        <h4><i>Reqiurements:</i></h4>
+        <ul class="list-style-type-disc">
+          <li>Power outlet</li>
+          <li>Voltage input 230V</li>
+          <li>Frequency range 50Hz</li>
+          <li>Home WiFi connection</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <img style="display:block;height:300px" src="https://i0.wp.com/www.graphicsfuel.com/wp-content/uploads/2011/04/world-globe02-512x512.png?resize=512%2C512&ssl=1" alt="EARTH">
+      <!-- <span class="glyphicon glyphicon-signal logo"></span> -->
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-grey">
+  <div class="row">
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-globe logo slideanim"></span>
+    </div>
+    <div class="col-sm-8">
+      <h2>Our Values</h2><br>
+      <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+      <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Container (Services Section) -->
+<div id="specs" class="container-fluid text-center">
+  <h2>SPECIFICATIONS</h2>
+  <h4>What we offer</h4>
+  <br>
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-heart logo-small"></span>
+      <h4>INTERACTIVE WEBSITE</h4>
+      <p>Our user friendly interactive website will <br>make your life more comfortable</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-off logo-small"></span>
+      <h4>POWER</h4>
+      <p>Monitors day to day power consumption</p>
+    </div>
+
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-lock logo-small"></span>
+      <h4>Safe & Secure</h4>
+      <p>We are using certified network connections.</p>
+    </div>
+  </div>
+  <br><br>
+  <div class="row slideanim">
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-leaf logo-small"></span>
+      <h4>GO GREEN</h4>
+      <p>Completely Eco friendly</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-certificate logo-small"></span>
+      <h4>CERTIFIED</h4>
+      <p>Operates upto 118*F</p>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-stats logo-small"></span>
+      <h4 style="color:#303030;">STATS</h4>
+      <p>By analysing stats you can now reduce the <br> use of energy suckers in your home</p>
+    </div>
+  </div>
+</div>
+
+<!-- Container (Portfolio Section) -->
+<div id="gallery" class="container-fluid text-center bg-grey">
+  <h2>GALLERY</h2><br>
+  <h4>What we have created</h4>
+  <div class="row text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="paris.jpg" alt="Paris" width="400" height="300">
+        <p><strong>Paris</strong></p>
+        <p>Yes, we built Paris</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="newyork.jpg" alt="New York" width="400" height="300">
+        <p><strong>New York</strong></p>
+        <p>We built New York</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="sanfran.jpg" alt="San Francisco" width="400" height="300">
+        <p><strong>San Francisco</strong></p>
+        <p>Yes, San Fran is ours</p>
+      </div>
+    </div>
+  </div><br>
+
+  <h2>What our customers say</h2>
+  <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+      </div>
+      <div class="item">
+        <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
+      </div>
+      <div class="item">
+        <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+<!-- Container (Pricing Section) -->
+<div id="faq" class="container-fluid">
+  <div class="text-center">
+    <h2>FAQ</h2>
+    <h4>Handpicked FAQ's</h4>
+  </div>
+  <div id="myCarousel2" class="carousel slide text-center" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel2" data-slide-to="1"></li>
+      <li data-target="#myCarousel2" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+      </div>
+      <div class="item">
+        <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
+      </div>
+      <div class="item">
+        <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel2" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel2" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<!-- Container (Contact Section) -->
+<div id="contact" class="container-fluid bg-grey">
+  <h2 class="text-center">CONTACT</h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Kakinada, AndhraPradesh</p>
+      <p><span class="glyphicon glyphicon-phone"></span> Our number</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> mountainmamooths@gmail.com</p>
+    </div>
+    <div class="col-sm-7 slideanim">
+      <form action="{{url_for('contactus')}}" method="POST">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email"required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-default pull-right" type="submit">Send</button>
+        </div>
+      </div>
+    </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- Image of location/map -->
+<img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
+
+<footer class="container-fluid text-center">
+  <a href="#myPage" title="To Top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a>
+  <p>Made By Mountain Mamooths <a href="https://www.w3schools.com" title="Visit w3schools">www.mountainMamooth.com</a></p>
+</footer>
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+
+  $(window).scroll(function() {
+    $(".slideanim").each(function(){
+      var pos = $(this).offset().top;
+
+      var winTop = $(window).scrollTop();
+        if (pos < winTop + 600) {
+          $(this).addClass("slide");
+        }
+    });
+  });
+})
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row slideanim">
+  <div class="col-sm-4 col-xs-12">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h1>Basic</h1>
+      </div>
+      <div class="panel-body">
+        <p><strong>20</strong> Lorem</p>
+        <p><strong>15</strong> Ipsum</p>
+        <p><strong>5</strong> Dolor</p>
+        <p><strong>2</strong> Sit</p>
+        <p><strong>Endless</strong> Amet</p>
+      </div>
+      <div class="panel-footer">
+        <h3>$19</h3>
+        <h4>per month</h4>
+        <button class="btn btn-lg">Sign Up</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h1>Pro</h1>
+      </div>
+      <div class="panel-body">
+        <p><strong>50</strong> Lorem</p>
+        <p><strong>25</strong> Ipsum</p>
+        <p><strong>10</strong> Dolor</p>
+        <p><strong>5</strong> Sit</p>
+        <p><strong>Endless</strong> Amet</p>
+      </div>
+      <div class="panel-footer">
+        <h3>$29</h3>
+        <h4>per month</h4>
+        <button class="btn btn-lg">Sign Up</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h1>Premium</h1>
+      </div>
+      <div class="panel-body">
+        <p><strong>100</strong> Lorem</p>
+        <p><strong>50</strong> Ipsum</p>
+        <p><strong>25</strong> Dolor</p>
+        <p><strong>10</strong> Sit</p>
+        <p><strong>Endless</strong> Amet</p>
+      </div>
+      <div class="panel-footer">
+        <h3>$49</h3>
+        <h4>per month</h4>
+        <button class="btn btn-lg">Sign Up</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> -->

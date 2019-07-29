@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Smart Plug</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="home">WHAT IS A SMARTPLUG ?
+The smart home sector is taking off, with all kinds of brands putting forth their own devices that promise to help you save time, electricity, maintain better home security, and get off the couch less often. "Turning your “dumb” home into a smart one isn’t difficult if you have the right devices." In fact, there’s one device that can make your entire home smarter, or at least help you control your otherwise “dumb” devices more effectively and easily.
+
+A smart plug is a device that you can plug into any wall outlet in your home. Once it’s plugged in, voilà! You have a smart outlet! What makes it smart is a connection to a mobile app that lets you control the outlet from your phone. Once the outlet is smart, any appliance you plug into it becomes smart. This means that you can turn off a lamp or start the slow cooker with a swipe of your finger—no matter where you are. And if you don’t even want to do that much work, just set up a schedule, and let the devices connected to your smart plug take care of themselves.</string>
+</resources>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style media="screen">
+  }
+  a:link {
+   text-decoration: none;
+  }
+
+  a:visited {
+  text-decoration: none;
+  }
+
+  a:hover {
+  text-decoration: none;
+  }
+
+  a:active {
+  text-decoration: none;
+  }
+  .w3-col
+  {
+    color: #fff;
+    background-color: #000;
+  }
+  footer
+  {
+    background-color: #000;
+    height:500%;
+  }
+  .cfooter
+  {
+    text-align: right;
+  }
+  .Body {
+  background-image: url("static/white.jpg");
+  background-repeat: no-repeat;
+  height:900px;
+  background-size: cover;
+}
+.ptag
+{
+
+  display: inline-block
+}
+.q
+{
+  width:150px;
+}
+    </style>
+
+    <title>FAQ"S</title>
+  <div class="container" style="max-height:70% max-width:50% ">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <script>
+  var messages={{ messages | safe }};
+  for(var i=0;i<messages.length;i++)
+  {
+    alert(messages[i]);
+  }
+</script>
+
+        {% endif %}
+    {% endwith %}
+</div>
+  </head>
+<body >
+
+
+<div class="row navbar navbar-expand-sm w3-black navbar-dark">
+  <div class="col col-md-3">
+     <ul class="navbar-nav">
+       <li class="nav-item">
+         <a href="status"><h1>&nbsp Status</h1></a>
+       </li>
+       <li class="nav-item">
+         <a href="statistics"><h1>&nbsp Statistics</h1></a>
+       </li>
+       <li class="nav-item">
+         <a href="#"><h1>&nbsp Faq's</h1></a>
+       </li>
+     </ul>
+  </div>
+  <div class="col col-md-7">
+
+  </div>
+  <div class="col col-md-2">
+     <ul class="navbar-nav">
+       <li class="nav-item">
+         <a href="home_after_log"><h1>&nbsp Home</h1></a>
+       </li>
+       <li class="nav-item">
+         <a href="signout"><h1>&nbsp Sign Out</h1></a>
+       </li>
+     </ul>
+  </div>
+</div>
+<div class="Body">
+</div>
+
+<footer>
+
+<div class="w3-row w3-black">
+           <!-- <img src="src/nlogo.jpeg" class="w3-display-bottomleft" height=39px alt="LOGO"> -->
+           <div class="w3-col w3-right-align">
+                <h5 class="cfooter"><a href="#">Project Space 2.0</a> &nbsp &nbsp &nbsp Powered By <a href="#">T-Hub&nbsp</a></h5>
+           </div>
+</div>
+</footer>
+  </body>
+</html>

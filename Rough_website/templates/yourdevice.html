@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="15" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </script>
+    <title>Chart</title>
+    <style type="text/css">
+	.bg{
+		background-repeat: no-repeat;
+		background: url({{url_for('static',filename='world.jpg')}});
+	}
+  .cll{
+    color: white;
+  }
+  .navcll{
+    background: #000000;
+  }
+</style>
+<div class="container" style="max-height:70% max-width:50% ">
+ {% with messages = get_flashed_messages(with_categories=true) %}
+       {% if messages %}
+           <script>
+ var messages={{ messages | safe }};
+ for(var i=0;i<messages.length;i++)
+ {
+   alert(messages[i]);
+ }
+</script>
+
+       {% endif %}
+   {% endwith %}
+</div>
+  </head>
+<body class="bg">
+<nav class="navbar navbar-expand-sm navcll">
+
+    <div class="row">
+
+      <div class="col-md-2">
+        <ul class="navbar-nav">
+
+        <a class="navbar-brand cll" href="#"><img src="{{url_for('static',filename='logo.png')}}" alt="logo" style="width:80px;"></a>
+
+          <li class="nav-item active">
+            <a class="nav-link cll" href="yourdevice">Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link cll" href="statistics">Statistics</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link cll" href="#">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link cll" href="#">Disabled</a>
+          </li>
+          </ul>
+      </div>
+
+
+      <div class="col-md-8">
+            <pre>                                                                                          </pre>
+      </div>
+      <div class="col-md-1 ">
+        <div class="nav-item">
+          <a class="nav-link cll" href="home_afer_log">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspHome</a>
+        </div>
+      </div>
+      <div class="col-md-1 ">
+        <a class="nav-link cll" href="signout">SignOut</a>
+      </div>
+
+      </div>
+    </div>
+
+
+  </nav>
+
+<div id="stats" class="container-fluid tab-pane active"><br>
+			<pre><h3>                                                                        Today's Power Comsumption[{{date}}]</h3></pre>
+			<div class="row" id="#power">
+		<div class="col-md-6">
+			<div class="container-fluid">
+				<embed type="image/svg+xml" src="{{g1|safe}}" />
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="container-fluid">
+				<embed type="image/svg+xml" src="{{g2|safe}}"/>
+			</div>
+		</div>
+	</div>
+	<br>
+	<pre><h4>  Total Power consumption:{{powerandcurrentdata[9][3]}}                                                                               Total Current consumption:{{powerandcurrentdata[9][4]}}</h4></pre>
+
+	</div>
+
+  </body>
+</html>

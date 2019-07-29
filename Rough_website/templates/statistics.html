@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+    <title>Statistics</title>
+    <style type="text/css">
+  .bg{
+    background-repeat: no-repeat;
+    background: url({{url_for('static',filename='world.jpg')}});
+  }
+  .cll{
+    color: white;
+  }
+  .navcll{
+    background: #000000;
+  }
+  .bouton-image:before {
+    content: "";
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: text-fill;
+    background-image: transparent;
+    background-position : center center;
+    background-repeat:no-repeat;
+}
+
+.monBouton:before{
+     background-image : url({{url_for('static',filename='logo.png')}});
+}
+</style>
+<div class="container" style="max-height:70% max-width:50% ">
+ {% with messages = get_flashed_messages(with_categories=true) %}
+       {% if messages %}
+           <script>
+ var messages={{ messages | safe }};
+ for(var i=0;i<messages.length;i++)
+ {
+   alert(messages[i]);
+ }
+</script>
+
+       {% endif %}
+   {% endwith %}
+</div>
+  </head>
+<body class="bg" >
+
+  <nav class="navbar navbar-expand-sm navcll">
+
+      <div class="row">
+
+        <div class="col-md-2">
+          <ul class="navbar-nav">
+
+          <a class="navbar-brand cll" href="#"><img src="{{url_for('static',filename='logo.png')}}" alt="logo" style="width:80px;"></a>
+
+            <li class="nav-item active">
+              <a class="nav-link cll" href="yourdevice">Status</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link cll" href="statistics">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link cll" href="#">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled cll" href="#">Disabled</a>
+            </li>
+            </ul>
+        </div>
+
+
+        <div class="col-md-8">
+              <pre>                                                                                          </pre>
+        </div>
+        <div class="col-md-1 ">
+          <div class="nav-item">
+            <a class="nav-link cll" href="home_after_log">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspHome</a>
+          </div>
+        </div>
+        <div class="col-md-1 ">
+          <a class="nav-link cll" href="signout">SignOut</a>
+        </div>
+
+        </div>
+      </div>
+
+
+    </nav>
+    <br>
+    <div class="row">
+      <div class="col-md-8">
+    <form action="{{url_for('checkbydate')}}" method="POST">
+      <h3>&nbspPower and Current Usage:</h3>
+      <br>
+      <div class="form-group">
+      <pre><label>&nbsp<big>From:</big> </label><input type="date" name="fromdate">    <label><big>To  :</big></label><input type="date" name="todate">                    Power:{{power}}          Current:{{current}}    </pre>
+    </div>
+    &nbsp&nbsp&nbsp
+    <select name="submittype">
+          <option value="checkdata">Check For These Dates</option>
+            <option value="downloaddata">Download Data For These Dates</option>
+            <option value="downloadalldata">Download All Data From Starting</option>
+    </select>
+    &nbsp&nbsp<input type="submit" class='btn btn-secondary btn-sm'name="submit">
+    <br><br>
+    </form>
+  </div>
+  <div class="col-md-4">
+   <pre>                           <br>                                    </pre><a href="yourdevice2" class="w3-btn w3-light"><i class="fa fa-power-off fa-5x" aria-hidden="true"></i></i></a>&nbsp<br>{{onoffdetails}}
+    <!-- &nbsp&nbsp&nbsp&nbsp<button class="btn bouton-image monBouton"></button> -->
+  </div>
+    </div>
+    <br>
+<div class="row">
+  <div class="col-md-5">
+    <form action="{{url_for('setschedule')}}" method="POST">
+   <h3>&nbspSchedule Your Device :</h3>
+   <br>
+   <div class="form-group">
+<pre><label>&nbsp<big>Start Time:</big> </label><input type="time" name="starttime">    <label><big>End Time:</big></label><input type="time" name="endtime"></pre>
+ </div>
+ &nbsp&nbsp<input type="submit" class='btn btn-secondary btn-sm'name="submit">
+ </form>
+</div>
+  <div class="col-md-7">
+
+  </div>
+
+</div>
+<br>
+<div class="row">
+  <form action="{{url_for('checkschedule')}}" method="POST">
+    <h3>&nbsp&nbsp&nbspCheck Your Device Schedule Here</h3>
+    &nbsp&nbsp&nbsp&nbsp<input class="btn btn-secondary"type="submit" value="CHECK">
+   <h2>&nbsp&nbsp&nbsp&nbsp{{deviceSchedule}}</h2><br><h2>&nbsp&nbsp&nbsp&nbsp{{workingtime}}</h2>
+ </from>
+     </div>
+
+
+</div>
+
+
+  </body>
+</html>
